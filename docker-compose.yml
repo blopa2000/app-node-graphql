@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  mongo:
+    image: mongo:4.4.0
+    container_name: mymongo
+    logging: 
+      driver: none
+  server:
+    build: .
+    container_name: app
+    environment: 
+      MONGO_URL: "mongodb://mongo/mydatabase"
+    ports: 
+      - "3000:3000"
+    depends_on: 
+      - mongo
+    volumes: 
+      - .:/usr/src/rest-api
+      - /usr/src/rest-api/node_modules
