@@ -1,21 +1,13 @@
-import tasks from "./tasks";
-export const resolvers = {
+import Courses from "../models/courses";
+
+export default {
   Query: {
-    hello: () => {
-      return "hello world";
+    async getCourses() {
+      return await Courses.find();
     },
-    greet(root, { name }, context) {
+    async getCourse(root, { _id }, context) {
       console.log(context);
-      return "hello!" + name;
-    },
-    tasks() {
-      return tasks;
-    },
-  },
-  Mutation: {
-    createTask(_, { input }) {
-      tasks.push({ ...input, _id: tasks.length });
-      return tasks;
+      return await Courses.findOne({ _id });
     },
   },
 };

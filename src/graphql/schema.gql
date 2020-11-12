@@ -1,22 +1,11 @@
 type Query {
-  hello: String
-  greet(name: String!): String
-  tasks: [Task]
+  getCourses: [Courses]
+  getCourse(_id: ID!): Courses
 }
 
-type Task {
+type Courses {
   _id: ID
   title: String!
   description: String!
-  number: Int
-}
-
-type Mutation {
-  createTask(input: TaskInput): [Task]
-}
-
-input TaskInput {
-  title: String!
-  description: String!
-  number: Int
+  topic: String
 }

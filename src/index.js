@@ -1,12 +1,13 @@
 import express from "express";
+import { makeExecutableSchema } from "graphql-tools";
 import { graphqlHTTP } from "express-graphql";
-import schema from "./graphql/schema";
+import resolvers from "./graphql/resolvers";
 import morgan from "morgan";
 import cors from "cors";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 import connect from "./database";
-
-import router from "./router/index";
 
 const app = express();
 connect();
@@ -17,7 +18,12 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(router);
+const typeDefs = readFileSync(join(__dirname, "graphql", "schema.gql"), "utf-8");
+
+const schema = makeExecutableSchema({
+  typeDefs: typeDefs,
+  resolvers: resolvers,
+});
 
 app.use(
   "/graphql",
