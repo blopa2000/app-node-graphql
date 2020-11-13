@@ -1,14 +1,16 @@
 type Query {
   getCourses: [Courses]
   getCourse(_id: ID!): Courses
+  getTeachers: [Teachers]
+  getTeacher(id: ID!): Teachers
 }
 
-type Courses {
-  _id: ID
-  title: String!
-  description: String!
-  teacher: Teacher!
-  topic: String
+type Mutation {
+  createCourse(input: CourseInput!): Courses
+  createTeacher(input: TeacherInput): Teachers
+  updateTeacher(id: ID, input: updateTeacherInput): Teachers
+  updateCourse(id: ID, input: updateCourseInput): Courses
+  DeleteCourse(idCourse: ID, idTeacher: ID): [Courses]
 }
 
 enum Gender {
@@ -17,18 +19,21 @@ enum Gender {
   Other
 }
 
-type Teacher {
+type Courses {
+  _id: ID
+  title: String!
+  description: String!
+  teacher: Teachers!
+  topic: String
+}
+
+type Teachers {
   _id: ID
   firstName: String!
   lastName: String!
   gender: Gender
   aptitudes: [String]
   courses: [Courses]
-}
-
-type Mutation {
-  createCourse(input: CourseInput!): Courses
-  createTeacher(input: TeacherInput): Teacher
 }
 
 input CourseInput {
@@ -43,4 +48,17 @@ input TeacherInput {
   lastName: String!
   gender: Gender
   aptitudes: [String]
+  courses: [ID]
+}
+
+input updateTeacherInput {
+  firstName: String
+  lastName: String
+  gender: Gender
+}
+
+input updateCourseInput {
+  topic: String
+  description: String
+  title: String
 }
