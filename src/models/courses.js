@@ -10,6 +10,10 @@ const schemaCourses = new Schema(
       type: String,
       required: true,
     },
+    teacher: {
+      type: Schema.Types.ObjectId,
+      ref: "teacher",
+    },
     topic: {
       type: String,
     },
@@ -19,4 +23,4 @@ const schemaCourses = new Schema(
   }
 );
 
-export default model("Courses", schemaCourses);
+export default model("courses", schemaCourses);

@@ -7,5 +7,40 @@ type Courses {
   _id: ID
   title: String!
   description: String!
+  teacher: Teacher!
   topic: String
+}
+
+enum Gender {
+  M
+  F
+  Other
+}
+
+type Teacher {
+  _id: ID
+  firstName: String!
+  lastName: String!
+  gender: Gender
+  aptitudes: [String]
+  courses: [Courses]
+}
+
+type Mutation {
+  createCourse(input: CourseInput!): Courses
+  createTeacher(input: TeacherInput): Teacher
+}
+
+input CourseInput {
+  title: String!
+  description: String!
+  teacher: ID!
+  topic: String
+}
+
+input TeacherInput {
+  firstName: String!
+  lastName: String!
+  gender: Gender
+  aptitudes: [String]
 }
