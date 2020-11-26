@@ -12,7 +12,7 @@ import Courses from "../models/courses";
 import Teachers from "../models/teachers";
 
 export default (app) => {
-  app.set("port", process.env.PORT || 3000);
+  app.set("port", process.env.PORT || 4000);
   app.use(morgan("dev"));
   app.use(cors());
   app.use(json());
