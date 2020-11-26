@@ -1,4 +1,4 @@
-# rest-node
+# api-courses
 
 ## Docker install
 
